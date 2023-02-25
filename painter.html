@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <title>Assignment 06</title>
+ </head>
+<body>
+<h1>Painter entry by Manoj Thella</h1>
+
+<form>
+    <label for="form1_name">The hidden painter name</label>
+    <input type ="password" id="form1_name" name="form1_name" min=10 max=50 step=2 value=Monet> <br>
+
+    <label for="form1_guess">Guess the painter</label>
+    <input type ="text" id="form1_guess" name="form1_guess" autofocus> <br>
+
+    <input type="button" onclick="resolveForm()" value="Check the guess">
+</form>
+
+
+<p id="result">Results</p>
+
+<script> 
+
+var good=0
+var oops=0
+
+function resolveForm (){
+    console.log("Check the guess")
+    name = document.getElementById("form1_name").value
+    guess = document.getElementById("form1_guess").value
+    confirmed = confirm("Are these the values? "+name+" and "+guess)
+    
+    out = document.getElementById("result")
+    if(name==guess){
+        alert("You got it right")
+        good=good+1
+    } else {
+        oops=oops+1
+        alert('Sorry')
+    }
+    out.innerHTML ="Right count: " +good+" Wrong count: "+oops
+}
+</script>
+
+</body>
+</html> 

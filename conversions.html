@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Currency Conversions</title>
+    </head>
+ 
+<body>
+
+<h2>Shows Currency Conversions by Manoj Thella</h2>
+
+<form>
+    <label for="form1_amount">Enter base amount</label>
+    <input type ="number" id="form1_amount" name="form1_amount" value=50> <br>
+
+    <label for="form1_conversion">Enter the conversion rate</label>
+    <input type ="text" id="form1_conversion" name="form1_conversion" value="30"> <br>
+
+    <input type="button" onclick="convert()" value="Show conversions">
+</form>
+
+
+<p id="result">Converted Currency</p>
+
+<script> 
+
+function convert(){
+    var toShow="";
+    console.log("Show conversions")
+    number = document.getElementById("form1_amount").value
+    conversion = document.getElementById("form1_conversion").value
+    
+    out = document.getElementById("result")
+    for(let i=0;i<5;i++){
+        let value=(2**i);
+    toShow=toShow+number*value+' is '+(number*conversion*value).toFixed(1)+'; ';
+    }
+    document.getElementById("result").innerHTML="Conversions are " + toShow;
+
+
+}
+</script>
+
+</body>
+</html> 

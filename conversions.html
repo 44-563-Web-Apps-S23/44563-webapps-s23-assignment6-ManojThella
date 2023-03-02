@@ -1,44 +1,101 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Currency Conversions</title>
-    </head>
- 
+
+<head>
+    <title>Currency Conversions</title>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" 
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" 
+    integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+</head>
+
 <body>
 
-<h2>Shows Currency Conversions by Manoj Thella</h2>
+    <h2>Shows Currency Conversions by Manoj Thella</h2>
 
-<form>
-    <label for="form1_amount">Enter base amount</label>
-    <input type ="number" id="form1_amount" name="form1_amount" value=50> <br>
+    <form>
+        <label for="form1_amount">Enter base amount</label>
+        <input type="number" id="form1_amount" name="form1_amount" value=50> <br>
 
-    <label for="form1_conversion">Enter the conversion rate</label>
-    <input type ="text" id="form1_conversion" name="form1_conversion" value="30"> <br>
+        <label for="form1_conversion">Enter the conversion rate</label>
+        <input type="text" id="form1_conversion" name="form1_conversion" value="30"> <br>
 
-    <input type="button" onclick="convert()" value="Show conversions">
-</form>
+        <input type="button" onclick="convert()" value="Show conversions">
+    </form>
 
 
-<p id="result">Converted Currency</p>
+    <p id="result">Converted Currency</p>
 
-<script> 
-
-function convert(){
-    var toShow="";
-    console.log("Show conversions")
-    number = document.getElementById("form1_amount").value
-    conversion = document.getElementById("form1_conversion").value
     
-    out = document.getElementById("result")
-    for(let i=0;i<5;i++){
-        let value=(2**i);
-    toShow=toShow+number*value+' is '+(number*conversion*value).toFixed(1)+'; ';
+    <form class="form-group">
+        <div class="form-check">
+            <input type="radio" onclick="chooseOp()" id="avgValue" value="mean" name="check">
+            <label for="avgValue">average</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" onclick="chooseOp()" id="maxValue" value="maximum" name="check">
+        <label for="avgValue">max</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" onclick="chooseOp()" id="avgValue" value="minimum" name="check">
+        <label for="avgValue">min</label>
+        </div>
+    </form>
+
+    <p id="radioResults">Arthematic values</p>
+
+    <script>
+        function convert() {
+            var toShow = "";
+            number = document.getElementById("form1_amount").value
+            conversion = document.getElementById("form1_conversion").value
+
+            out = document.getElementById("result")
+            for (let i = 0; i < 5; i++) {
+                let value = (2 ** i);
+                toShow = toShow + number * value + ' is ' + Math.round(number * conversion * value * 10) / 10 + '; ';
+            }
+            document.getElementById("result").innerHTML = "Conversions are " + toShow;
+        }
+
+        function chooseOp() {
+            number = document.getElementById("form1_amount").value
+            conversion = document.getElementById("form1_conversion").value
+            property = document.getElementsByName("check")
+            var check;   
+        for(i = 0; i < property.length; i++) {
+            if(property[i].checked){
+               check = property[i].value 
+            }
+        }
+        output = document.getElementById("radioResults")
+        var maxValue 
+        var minValue 
+        var toShow = ''
+        maxValue = Math.max(number, conversion);
+        minValue = Math.min(number, conversion);
+        if(check === "mean"){
+            toShow = "mean of "+number+" and "+conversion+" is : "+(parseFloat(number)+parseFloat(conversion))/2
+        }else if(check === "maximum"){
+            toShow = "maxmimum of "+number+" and "+conversion+" is : "+maxValue
+        }else if(check === "minimum"){
+            toShow = "minimum of "+number+" and "+conversion+" is : "+minValue;
+        }   
+        output.innerHTML = toShow.toString() 
     }
-    document.getElementById("result").innerHTML="Conversions are " + toShow;
-
-
-}
-</script>
+    </script>
 
 </body>
-</html> 
+<style>
+    body{
+        margin: 100px;
+        text-align: center;
+    }
+</style>
+
+</html>

@@ -22,7 +22,7 @@
     <label for="form1_guess">Guess the painter</label>
     <input type ="text" id="form1_guess" name="form1_guess" autofocus> <br>
 
-    <input type="button" onclick="resolveForm()" value="Check the guess">
+    <input id="resolve" type="button" onclick="resolveForm()" value="Check the guess">
 </form>
 
 
@@ -37,7 +37,7 @@ function resolveForm (){
     console.log("Check the guess")
     name = document.getElementById("form1_name").value
     guess = document.getElementById("form1_guess").value
-    confirmed = confirm("Are these the values? "+name+" and "+guess)
+    // confirmed = confirm("Are these the values? "+name+" and "+guess)
     
     out = document.getElementById("result")
     if(name==guess){
@@ -45,9 +45,17 @@ function resolveForm (){
         good=good+1
     } else {
         oops=oops+1
-        alert('Sorry')
+        if (oops == 10) {
+            document.getElementById("resolve").setAttribute('onclick', wrongGuess());
+        } else {
+            alert('Sorry')
+        }
     }
     out.innerHTML ="Right count: " +good+" Wrong count: "+oops
+}
+
+function wrongGuess() {
+    alert("Sorry, ran out of guesses.")
 }
 
 </script>
@@ -82,6 +90,10 @@ function resolveForm (){
     body{
         margin: 100px;
         text-align: center;
+        background-color: burlywood;
+    }
+    form, button{
+        background-color: aqua;
     }
 </style>
 </body>

@@ -1,70 +1,90 @@
 <!DOCTYPE html>
 <html>
-    <head>
-    <title>Candy selection</title>
+
+<head>
+    <title>Candies selection</title>
     <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" 
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" 
-    integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+        crossorigin="anonymous"></script>
 </head>
+
 <body>
+    <h1 style="margin-top: 50px; margin-left:80px">Manoj Thella chooses candy</h1>
+    <div class="container bg-light" style="margin-top: 100px; margin-left:300px">
+        <form>
+            <input class="basic-style-1" type="checkbox" id="dark_chocolate" name="dark_chocolate" value="dark_chocolate"
+                checked>
+            <label class="basic-style-1" for="dark_chocolate">Dark Chocolate</label></br>
 
-<h2>Manoj Thella Chooses candy</h2>
+            <input class="basic-style-1" type="checkbox" id="nuts_candy" name="nuts_candy" value="nuts_candy">
+            <label class="basic-style-1" for="nuts_candy">Nuts</label></br>
 
-<form>
-    <label for="dark">Dark Chocolate</label>
-    <input type ="checkbox" id="dark" name="dark_chocolate" value="True"> <br>
+            <input class="basic-style-1" type="checkbox" id="chewy_candy" name="chewy_candy" value="chewy_candy">
+            <label class="basic-style-1" for="chewy_candy">Chewy</label></br>
 
-    <label for="nuts">Nuts</label>
-    <input type ="checkbox" id="nuts" name="nuts_chocolate" value="True"> <br>
+            <button class="basic-style-1 bg-info" id ="form1selectBox" onclick="selectBox()">Select a box</button>
+        </form>
+        <p style="font-size: larger;margin-top: 40px; margin-bottom: 30px;">Result1 => <span id="result1">Box Selection</span></p>
+    </div>
+    <div class="container bg-light" style="margin-top: 100px; margin-left:300px">
 
-    <label for="chewy">Chewy</label>
-    <input type ="checkbox" id="chewy" name="chewy_chocolate" value="False"> <br>
+        <form>
+            <label class="basic-style" for="size_form">Enter the size</label>
+            <input class="basic-style" type="text" id="size_form" name="size_form" value='' /> <br>
 
-    <input type="button" onclick="selectBox()" value="Select a box">
-</form>
+            <label class="basic-style" for="price_form">Enter price_form</label>
+            <input class="basic-style" type="text" id="price_form" name="price_form" value='' autofocus /> <br>
 
-<p id="result"></p>
+            <button class="basic-style bg-info" id ="form2UpdateVacation" onclick=" updateBox()">Update the box”</button>
+        </form>
+        <p style="font-size: larger;margin-top: 40px; margin-bottom: 30px;">Result2 => <span id="result2">Box Updates</span></p>
+    </div>
 
-<script> 
-var my_candy_box = {}
-
-function selectBox (){
-    my_candy_box = {}
-    dark = document.getElementById("dark_chocolate").checked
-    nuts = document.getElementById("nuts").checked
-    chewy = document.getElementById("chewy").checked 
-        if(dark){
-        my_candy_box["dark"] = "True"
-    }else{
-        my_candy_box["dark"] = "False"
-    }
-    if(nuts){
-        my_candy_box["nuts"] = "True"
-    }else{
-        my_candy_box["nuts"] = "False"
-    }
-    if(chewy){
-        my_candy_box["chewy"] = "True"
-    }else{
-        my_candy_box["chewy"] = "False"
-    }
-    document.getElementById("result").innerHTML = JSON.stringify(my_candy_box);
-}
-       
-</script>
-
+    <script>
+        var my_candy_box;
+        function selectBox() {
+            event.preventDefault();
+            var dark_chocolate = document.getElementById("dark_chocolate").checked;
+            var nuts_candy = document.getElementById("nuts_candy").checked;
+            var chewy_candy = document.getElementById("chewy_candy").checked;
+            if(dark_chocolate||nuts_candy||chewy_candy){
+                document.getElementById("form1selectBox").disabled = false;
+            } else {
+                document.getElementById("form1selectBox").disabled = true;
+            }
+            my_candy_box = {};
+            my_candy_box.dark = dark_chocolate;
+            my_candy_box.nuts_candy = nuts_candy;
+            my_candy_box.chewy_candy = chewy_candy;
+            var output = "";
+            for (var index in my_candy_box) {
+                output += index + ': ' + my_candy_box[index] + '; ';
+            }
+            document.getElementById("result1").innerHTML= output;
+        }
+        function updateBox() {
+            event.preventDefault();
+            var result = "";
+            var size_form = document.getElementById("size_form").value;
+            var price_form = document.getElementById("price_form").value;
+            my_candy_box["size_form"] = size_form;
+            my_candy_box["price_form"] = price_form;
+            var output = "";
+            for (var index in my_candy_box) {
+                output += index + ': ' + my_candy_box[index] + '; ';
+            }
+            document.getElementById("result2").innerText = output;
+        }
+    </script>
 
 </body>
-<style>
-    body{
-        margin: 100px;
-        text-align: center;
-    }
-</style>
-</html> 
+
+</html>
